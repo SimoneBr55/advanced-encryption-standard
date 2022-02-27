@@ -17,16 +17,12 @@ def matrixify_col(input):
     block3 = []
     block4 = []  # will host the last four bytes of our block
 
-    for char, i in zip(input, range(16)):
-        byte = (ord(char))
-        if(i <= 3):  # we add bytes to the blocks based on the posizion. That's quite rude
-            block1.append(byte)
-        elif(4 <= i <= 7):
-            block2.append(byte)
-        elif(8 <= i <= 11):
-            block3.append(byte)
-        elif(12 <= i <= 16):
-            block4.append(byte)
+    # This for loop has been made by Gianluca
+    for i in range(4):
+        block1.append(ord(input[i]))
+        block2.append(ord(input[i+4]))
+        block3.append(ord(input[i+8]))
+        block4.append(ord(input[i+12]))
 
     block_list = []  # we allocate the list containing the four columns
     # we populate with the four colomuns
@@ -40,3 +36,13 @@ def dematrixify(block_list):
         for byte in block:
             output += chr(byte)
     return output
+
+# if __name__ == "__main__":
+#     test_string = "abcdefghijklmnop"
+#     print(test_string)
+#     test_list = list(test_string)
+#     print(test_list)
+#     matr = matrixify_col(test_list)
+#     print(matr)
+#     dematr = dematrixify(matr)
+#     print(dematr)
